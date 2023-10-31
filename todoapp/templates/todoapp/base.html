@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title%}</title>
+    {% comment %} start of css files {% endcomment %}
+    <link rel="stylesheet" href="{% static 'todoapp/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'todoapp/css/bootstrap.css' %}">
+    {% comment %} end of css files {% endcomment %}
+</head>
+<body> 
+    
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8 mt-4">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3 ">
+                        <input name="task" type="text" class="form-control" placeholder="Enter the tasks">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                        </div>
+                      </div>
+                </form>
+                <div class="alert alert-warning mt-4 text-center fw-bold"  role="alert">
+                        My Tasks
+                </div>
+            </div>   
+        </div> 
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+        
+    </div>
+   
+
+
+    {% comment %} start of js files {% endcomment %}
+    <script src="{% static 'todoapp/js/all.min.js' %}"></script>
+    <script src="{% static 'todoapp/js/bootstrap.js' %}"></script>
+    <script src="{% static 'todoapp/js/jquery.js' %}"></script>
+    <script src="{% static 'todoapp/js/popper.js' %}"></script>
+    {% comment %} end of js files {% endcomment %}
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'todoapp/base.html' %}
+{% block content %} 
+     {% if todo %}
+     <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Tasks</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Action</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for td in todo %}
+                <tr>
+                    <td>
+                        {% if td.completed == True %}
+                         <span style="text-decoration:line-through">{{td.task}}</span>
+                        {% else %}
+                         {{td.task}} 
+                        {% endif %} 
+                    </td>
+                    <td>
+                        {% if td.completed == True %}
+                         <a href="{% url 'mark_complete' td.id %}"><i class="far fa-circle-check"></i></a>
+                        {% else %}
+                         <a href="{% url 'mark_incomplete' td.id %}"><i class="far fa-circle"></i></a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'update' td.id %}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                       <form action="{% url 'delete' td.id %}" method="POST">
+                        {% csrf_token %}
+                         <input type="submit" value="Delete" class="btn btn-danger">
+                       </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+     {% else %}
+      <h1>no records</h1>
+     
+     {% endif %}
+{% endblock content %}
